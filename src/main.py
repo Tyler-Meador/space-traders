@@ -1,5 +1,5 @@
 from rich.console import Console
-from Agent import Agent
+from models.Agent import Agent
 from enums.Factions import Factions
 
 console = Console()

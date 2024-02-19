@@ -1,14 +1,16 @@
-import requests
+from libraries.RequestHandler import RequestHandler
+
 
 class Agent:
     def __init__(self, agent) -> None:
         self.agent = agent
+        self.requestHandler = RequestHandler(None)
 
         with open("secrets", "r") as secrets:
             self.token = secrets.readline().strip()
 
         if self.token != '':
-            self.headers = {
+            self.requestHandler.headers = {
                 "Authorization": "Bearer " + self.token
             }
         else:
@@ -21,10 +23,11 @@ class Agent:
             "faction": faction
         }
 
-        response_json = requests.post("https://api.spacetraders.io/v2/register", json = json_data).json()
+        response_json = self.requestHandler.postNoAuth("https://api.spacetraders.io/v2/register", json_data)
 
         self.token = response_json['data']['token']
-        self.headers = {
+
+        self.requestHandler.headers = {
                     "Authorization": "Bearer " + self.token
                 }
         
@@ -35,4 +38,4 @@ class Agent:
 
 
     def view_agent(self) -> str:
-        return requests.get("https://api.spacetraders.io/v2/my/agent", headers=self.headers).json()
+        return self.requestHandler.get("https://api.spacetraders.io/v2/my/agent")

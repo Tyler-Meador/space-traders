@@ -5,9 +5,17 @@ from enums.Factions import Factions
 console = Console()
 
 if __name__ == '__main__':
-    Agent.prepAgent("testGroov6")
-    
-    if Agent.token == None:
-       console.print_json(data=Agent.register(Factions.COSMIC.name))
 
-    console.print_json(data=Agent.view_agent())
+   userInput = input("Choose Option: ") 
+
+   if userInput == "login":
+      Agent.prepAgent("testGroov6")
+   
+      if Agent.token == None:
+         console.print("Register Agent to Continue")
+      else:
+         console.print_json(data=Agent.viewAgent())
+
+   elif userInput == "register":
+      console.print_json(data=Agent.register(Factions.COSMIC.name))
+   

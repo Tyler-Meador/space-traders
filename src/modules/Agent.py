@@ -1,4 +1,5 @@
 import modules.RequestHandler as RequestHandler
+import modules.contracts as Contracts
 
 agent = None
 token = None
@@ -42,5 +43,8 @@ def register(faction) -> str:
     return response_json
 
 
-def view_agent() -> str:
+def viewAgent() -> str:
     return RequestHandler.get("https://api.spacetraders.io/v2/my/agent")
+
+def viewContract() -> str:
+    return Contracts.viewContract()

@@ -1,13 +1,13 @@
 from rich.console import Console
-from libraries.Agent import Agent
+import modules.Agent as Agent
 from enums.Factions import Factions
 
 console = Console()
 
 if __name__ == '__main__':
-    agent = Agent("testGroov5")
+    Agent.prepAgent("testGroov6")
     
-    if agent.token == None:
-       console.print_json(data=agent.register(Factions.COSMIC.name))
+    if Agent.token == None:
+       console.print_json(data=Agent.register(Factions.COSMIC.name))
 
-    console.print_json(data=agent.view_agent())
+    console.print_json(data=Agent.view_agent())

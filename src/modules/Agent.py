@@ -3,6 +3,8 @@ import modules.systemInfo as SystemInfo
 
 agent = None
 token = None
+ships = None
+activeShip = None
 
 def prepAgent() -> None:
     global agent
@@ -51,3 +53,14 @@ def viewAgent() -> str:
     SystemInfo.setSystem()
 
     return response
+
+def viewShips() -> str:
+    response = RequestHandler.get("https://api.spacetraders.io/v2/my/ships")
+
+    ships = response["data"]
+
+    reducedShips = []
+    for ship in ships:
+        reducedShips.append(ship["registration"])
+
+    return reducedShips
